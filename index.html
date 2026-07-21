@@ -533,34 +533,105 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
 
 <!-- ═══ CLIENTS (SLIDER) ═══ -->
+
+  
 <section id="clients" class="py-24 bg-zinc-50 dark:bg-zinc-900/40" x-data="{
     cSlide: 0,
-    clients: [
-      { name: 'GB Tourism', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
-      { name: 'GB Police', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
-      { name: 'Polo Federation', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
-      { name: 'Gov Departments', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' }
+    slides: [
+      // Slide 1 (4 Images)
+      [
+        { name: 'GB Tourism', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'GB Police', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'Polo Federation', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'Gov Departments', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' }
+      ],
+      // Slide 2 (4 Images)
+      [
+        { name: 'AKDN', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'WWF Pakistan', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'Serena Hotels', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'NHA', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' }
+      ],
+      // Slide 3 (4 Images)
+      [
+        { name: 'Red Cross', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'Local Brands', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'Education Dept', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' },
+        { name: 'Health Dept', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&q=80' }
+      ]
     ],
-    init() { setInterval(() => { this.cSlide = (this.cSlide + 1) % this.clients.length; }, 3000); }
+    init() { 
+      setInterval(() => { 
+        this.cSlide = (this.cSlide + 1) % this.slides.length; 
+      }, 4000); 
+    }
 }">
   <div class="max-w-6xl mx-auto px-6 text-center">
     <h2 class="reveal font-display font-bold text-4xl text-zinc-900 dark:text-white mb-12">Our Clients</h2>
     
-    <div class="overflow-hidden relative max-w-3xl mx-auto">
-      <div class="flex transition-transform duration-500 ease-in-out gap-6" :style="`transform: translateX(-${cSlide * 100}%)`">
-        <template x-for="(client, index) in clients" :key="index">
-          <div class="w-full shrink-0 flex flex-col items-center justify-center p-8 bg-white dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-700">
-             <div class="w-24 h-24 mb-4 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex items-center justify-center text-xs font-bold text-zinc-500">
-               <!-- Placeholder for Client Logos -->
-               LOGO
-             </div>
-             <p class="font-display font-bold text-lg text-zinc-900 dark:text-white" x-text="client.name"></p>
+    <div class="overflow-hidden relative w-full mx-auto">
+      <!-- Slider Track -->
+      <div class="flex transition-transform duration-700 ease-in-out" :style="`transform: translateX(-${cSlide * 100}%)`">
+        
+        <!-- Loop Through Slides (3 Slides total) -->
+        <template x-for="(slide, slideIndex) in slides" :key="slideIndex">
+          <div class="w-full shrink-0">
+            <!-- Grid for the 4 creative boxes -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              
+              <!-- Loop Through 4 Clients per slide -->
+              <template x-for="(client, clientIndex) in slide" :key="clientIndex">
+                <div class="group flex flex-col items-center justify-center p-6 md:p-8 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-lg hover:border-primary/50 hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-1">
+                   
+                   <!-- Smaller White Image Wrapper -->
+                   <!-- Note: brightness-0 and invert classes will turn any colored logo pure white -->
+                   <div class="w-16 h-16 mb-4 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                     <img :src="client.logo" 
+                          :alt="client.name" 
+                          loading="lazy"
+                          class="w-full h-full object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity">
+                   </div>
+                   
+                   <!-- Client Name -->
+                   <p class="font-display font-bold text-sm text-zinc-400 group-hover:text-white transition-colors" x-text="client.name"></p>
+                </div>
+              </template>
+              
+            </div>
           </div>
         </template>
+
       </div>
     </div>
+
+    <!-- Slide Indicators (Dots) -->
+    <div class="flex justify-center items-center gap-3 mt-10">
+      <template x-for="(slide, index) in slides" :key="index">
+        <button @click="cSlide = index" 
+                class="h-2 rounded-full transition-all duration-300"
+                :class="cSlide === index ? 'w-8 bg-primary' : 'w-2 bg-zinc-300 dark:bg-zinc-700 hover:bg-primary/50'">
+        </button>
+      </template>
+    </div>
+
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 <!-- ═══ TEAM ═══ -->
 <section id="team" class="py-24">
