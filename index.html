@@ -241,11 +241,55 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 </section>
 
 <!-- ═══ PORTFOLIO (TABS) ═══ -->
+
+
+
+
+<!-- ═══ PORTFOLIO (TABS & GRID) ═══ -->
 <section id="work" class="py-24" x-data="{ 
-    tab: 'documentaries', 
+    tab: 'all', 
+    visibleCount: 6,
     videoModal: false, 
     currentVideo: '',
-    openVideo(url) { this.currentVideo = url; this.videoModal = true; }
+    openVideo(url) { this.currentVideo = url; this.videoModal = true; },
+    projects: [
+      /* --- Commercials --- */
+      { id: 1, cat: 'commercials', title: 'Summer Campaign', desc: 'High-impact TV commercial.', img: 'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 2, cat: 'commercials', title: 'Product Launch', desc: 'Dynamic product reveal video.', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 3, cat: 'commercials', title: 'Brand Anthem', desc: 'Connecting the brand with audiences.', img: 'https://images.unsplash.com/photo-1541888045610-184518428800?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      /* --- Corporate Films --- */
+      { id: 4, cat: 'corporate', title: 'Annual Report', desc: 'A cinematic review of the year.', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 5, cat: 'corporate', title: 'CEO Message', desc: 'Corporate communication film.', img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 6, cat: 'corporate', title: 'Company Culture', desc: 'Inside the daily life of the team.', img: 'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      /* --- Documentaries --- */
+      { id: 7, cat: 'documentaries', title: 'Heritage of Hunza', desc: 'A cinematic journey through history.', img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 8, cat: 'documentaries', title: 'Life in the Mountains', desc: 'Story of local communities.', img: 'https://images.unsplash.com/photo-1535016120720-40c746a46dc1?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 9, cat: 'documentaries', title: 'Wildlife Conservation', desc: 'Protecting the endangered species.', img: 'https://images.unsplash.com/photo-1541888045610-184518428800?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      /* --- Tourism --- */
+      { id: 10, cat: 'tourism', title: 'Visit GB', desc: 'Tourism promotion campaign.', img: 'https://images.unsplash.com/photo-1541888045610-184518428800?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 11, cat: 'tourism', title: 'Autumn in Skardu', desc: 'Visuals of breathtaking landscapes.', img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 12, cat: 'tourism', title: 'Winter Sports', desc: 'Capturing extreme snow sports.', img: 'https://images.unsplash.com/photo-1535016120720-40c746a46dc1?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      /* --- Events --- */
+      { id: 13, cat: 'events', title: 'Tech Conference', desc: 'Live event coverage.', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 14, cat: 'events', title: 'Cultural Festival', desc: 'Celebrating local traditions.', img: 'https://images.unsplash.com/photo-1535016120720-40c746a46dc1?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 15, cat: 'events', title: 'Corporate Gala', desc: 'Award ceremony highlights.', img: 'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      /* --- Podcasts --- */
+      { id: 16, cat: 'podcasts', title: 'Creators Talk', desc: 'Multi-cam studio production.', img: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 17, cat: 'podcasts', title: 'Business Insights', desc: 'Interview with industry leaders.', img: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' },
+      { id: 18, cat: 'podcasts', title: 'Youth Voices', desc: 'Live podcast stream.', img: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&q=80', video: 'https://www.youtube.com/embed/ScMzIvxBSi4' }
+    ],
+    get filteredProjects() {
+      // If 'All Projects' is selected, show up to visibleCount. Otherwise, filter and show exactly 3.
+      if (this.tab === 'all') {
+        return this.projects.slice(0, this.visibleCount);
+      } else {
+        return this.projects.filter(p => p.cat === this.tab).slice(0, 3);
+      }
+    },
+    changeTab(newTab) {
+      this.tab = newTab;
+      this.visibleCount = 6; // Reset visible count when switching tabs
+    }
 }">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center mb-10">
@@ -253,62 +297,42 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
       <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Portfolio</h2>
     </div>
 
-    <!-- Tabs -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button @click="tab = 'documentaries'" :class="tab === 'documentaries' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400'" class="px-6 py-2.5 rounded-full border text-sm font-medium transition-colors">Documentaries</button>
-      <button @click="tab = 'government'" :class="tab === 'government' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400'" class="px-6 py-2.5 rounded-full border text-sm font-medium transition-colors">Government Promotion</button>
-      <button @click="tab = 'corporate'" :class="tab === 'corporate' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400'" class="px-6 py-2.5 rounded-full border text-sm font-medium transition-colors">Corporate</button>
+    <!-- Dynamic Tabs -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button @click="changeTab('all')" :class="tab === 'all' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">All Projects</button>
+      <button @click="changeTab('commercials')" :class="tab === 'commercials' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">Commercials</button>
+      <button @click="changeTab('corporate')" :class="tab === 'corporate' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">Corporate Films</button>
+      <button @click="changeTab('documentaries')" :class="tab === 'documentaries' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">Documentaries</button>
+      <button @click="changeTab('tourism')" :class="tab === 'tourism' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">Tourism</button>
+      <button @click="changeTab('events')" :class="tab === 'events' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">Events</button>
+      <button @click="changeTab('podcasts')" :class="tab === 'podcasts' ? 'bg-accent text-white border-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'" class="px-5 py-2 rounded-full border text-sm font-medium transition-colors">Podcasts</button>
     </div>
 
-    <!-- Tab Content -->
-    <div class="grid md:grid-cols-2 gap-6">
-      
-      <!-- Documentaries -->
-      <template x-if="tab === 'documentaries'">
-        <article @click="openVideo('https://www.youtube.com/embed/ScMzIvxBSi4')" class="cursor-pointer card-h group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-          <div class="relative w-full h-64 bg-zinc-800 flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Doc Thumb">
-            <svg class="w-16 h-16 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <!-- Grid Output -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <template x-for="project in filteredProjects" :key="project.id">
+        <article @click="openVideo(project.video)" class="cursor-pointer card-h group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+          <div class="relative w-full h-56 bg-zinc-800 flex items-center justify-center">
+            <img :src="project.img" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-40 transition-opacity" :alt="project.title">
+            <svg class="w-16 h-16 text-white relative z-10 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
           <div class="p-6">
-            <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">Heritage of Hunza</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400">A cinematic journey through the rich history and culture of the region.</p>
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-2" x-text="project.title"></h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400" x-text="project.desc"></p>
           </div>
         </article>
       </template>
+    </div>
 
-      <!-- Government Promotion -->
-      <template x-if="tab === 'government'">
-        <article @click="openVideo('https://www.youtube.com/embed/ScMzIvxBSi4')" class="cursor-pointer card-h group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-          <div class="relative w-full h-64 bg-zinc-800 flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1541888045610-184518428800?w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Gov Thumb">
-            <svg class="w-16 h-16 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">GB Police Initiative</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400">Showcasing the dedication and modernization of Gilgit-Baltistan security institutions.</p>
-          </div>
-        </article>
-      </template>
-
-      <!-- Corporate -->
-      <template x-if="tab === 'corporate'">
-        <article @click="openVideo('https://www.youtube.com/embed/ScMzIvxBSi4')" class="cursor-pointer card-h group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
-          <div class="relative w-full h-64 bg-zinc-800 flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Corp Thumb">
-            <svg class="w-16 h-16 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-2">Tourism Brand Story</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400">A high-impact corporate reel capturing the essence of adventure tourism.</p>
-          </div>
-        </article>
-      </template>
-
+    <!-- Load More Button (Only shows in 'All Projects' tab when more items exist) -->
+    <div x-show="tab === 'all' && visibleCount < projects.length" class="mt-12 flex justify-center">
+      <button @click="visibleCount += 6" class="inline-flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white font-medium px-8 py-3 rounded-full hover:border-accent hover:text-accent transition-colors text-sm">
+        View More
+      </button>
     </div>
 
     <!-- YouTube Modal -->
-    <div x-show="videoModal" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4">
+    <div x-show="videoModal" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4">
       <div @click.away="videoModal = false; currentVideo = ''" class="relative w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
         <button @click="videoModal = false; currentVideo = ''" class="absolute top-4 right-4 z-10 p-2 bg-white/10 hover:bg-accent rounded-full text-white transition">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -320,6 +344,18 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+<!-- ═══ PORTFOLIO (TABS) ═══ -->
+  
 
 <!-- ═══ IMAGE GALLERY (SINGLE SLIDER + POPUP) ═══ -->
 <section id="gallery" class="py-24 bg-zinc-50 dark:bg-zinc-900/40" x-data="{ 
