@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ dark: true, mm: false }" :class="{'dark': dark}" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — MKB Films</title>
+
+<!-- Tailwind & Alpine.js -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind Config (Cinematic Colors) -->
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: { display: ['PT Sans','sans-serif'], body: ['DM Sans','sans-serif'] },
+      colors: { 
+        accent: '#C59A45', 
+        'accent-light': '#DFC27B',
+        zinc: {
+          50: '#F2F4F7', 100: '#E2E6EC', 200: '#C5CBD5', 300: '#A4ADB9', 400: '#84909F',
+          500: '#667485', 600: '#4F5A68', 700: '#3A434F', 800: '#222831', 900: '#14181D', 950: '#0A0D12',
+        }
+      }
+    }
+  }
+}
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html,body{font-family:'DM Sans',sans-serif}
+h1,h2,h3,h4,h5,h6{font-family:'PT Sans',sans-serif}
+body{transition:background-color .3s,color .3s}
+
+/* Filmic noise overlay */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.40;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E")}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#C59A45;border-radius:99px}
+
+.shimmer{position:relative;overflow:hidden}
+.shimmer::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:rgba(255,255,255,.12);transform:skewX(-20deg);transition:left .5s cubic-bezier(.4,0,.2,1)}
+.shimmer:hover::after{left:160%}
+
+[x-cloak]{display:none!important}
+</style>
+</head>
+
+<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+<!-- ═══ NAV ═══ -->
+<header class="fixed inset-x-0 top-0 z-50 transition-all duration-300 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-zinc-950/10 border-b border-zinc-200 dark:border-zinc-800">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="index.html" class="font-display font-bold text-xl tracking-tight relative z-10">
+      <span class="text-zinc-900 dark:text-white">MKB</span><span class="text-accent"> Films</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-6 text-sm">
+      <li><a href="index.html" class="text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors">Home</a></li>
+      <li><a href="index.html#work" class="text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors">Portfolio</a></li>
+      <li><a href="team.html" class="font-bold text-zinc-900 dark:text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-accent">Team</a></li>
+      <li><a href="index.html#contact" class="text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors">Contact</a></li>
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html#contact" class="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-zinc-950 text-sm font-bold px-5 py-2 rounded-full hover:bg-accent-light transition-colors">
+        Start Project
+      </a>
+      <button @click="mm=!mm" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-white">
+        <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="mm" x-cloak class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div x-show="mm" x-cloak class="md:hidden bg-zinc-950 border-t border-zinc-900">
+    <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium">
+      <li><a href="index.html" class="block text-zinc-300">Home</a></li>
+      <li><a href="team.html" class="block text-accent">Team</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══ CINEMATIC PAGE HEADER ═══ -->
+<section class="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-zinc-950">
+  <div class="absolute inset-0 z-0 opacity-40">
+    <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=1600&q=80" class="w-full h-full object-cover mix-blend-luminosity grayscale" alt="Team Header">
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"></div>
+  </div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+    <p class="text-xs font-bold text-accent tracking-widest uppercase mb-3 animate-fade-in-up">The Visionaries</p>
+    <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6 drop-shadow-lg">Meet The Crew</h1>
+    <p class="text-zinc-400 max-w-2xl mx-auto leading-relaxed text-lg">The directors, cinematographers, and editors dedicated to bringing your cinematic vision to life with uncompromising quality.</p>
+  </div>
+</section>
+
+<!-- ═══ INTERACTIVE TEAM GRID ═══ -->
+<section class="py-20 bg-zinc-950" x-data="teamApp()">
+  <div class="max-w-6xl mx-auto px-6">
+    
+    <!-- Team Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <template x-for="member in members" :key="member.id">
+        <!-- Team Member Card -->
+        <article @click="openModal(member)" 
+                 class="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:border-accent hover:shadow-[0_15px_30px_-10px_rgba(197,154,69,0.2)]">
+          
+          <!-- Image Container -->
+          <div class="aspect-[4/5] overflow-hidden relative">
+            <!-- Grayscale by default, color on hover -->
+            <img :src="member.img" :alt="member.name" class="w-full h-full object-cover grayscale opacity-80 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 group-hover:opacity-100">
+            <!-- Vignette Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-70"></div>
+          </div>
+
+          <!-- Bottom Text Info -->
+          <div class="absolute bottom-0 inset-x-0 p-6 transform transition-transform duration-300 group-hover:-translate-y-2">
+            <h3 class="font-display font-bold text-2xl text-white mb-1 group-hover:text-accent transition-colors" x-text="member.name"></h3>
+            <p class="text-sm text-zinc-400 font-medium tracking-wide uppercase" x-text="member.role"></p>
+          </div>
+          
+          <!-- Subtle Plus Icon overlay -->
+          <div class="absolute top-6 right-6 w-10 h-10 rounded-full bg-zinc-950/60 backdrop-blur flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border border-zinc-700 group-hover:border-accent">
+            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </div>
+
+        </article>
+      </template>
+    </div>
+
+    <!-- ═══ TEAM MEMBER MODAL ═══ -->
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950/95 backdrop-blur-md p-4 md:p-8">
+      
+      <!-- Click background to close -->
+      <div class="absolute inset-0" @click="closeModal()"></div>
+
+      <div x-show="modalOpen"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 scale-95 translate-y-8"
+           x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+           x-transition:leave-end="opacity-0 scale-95 translate-y-8"
+           class="relative z-10 w-full max-w-5xl bg-zinc-900 rounded-3xl overflow-hidden shadow-[0_0_50px_-10px_rgba(197,154,69,0.25)] ring-1 ring-zinc-700 flex flex-col md:flex-row max-h-[90vh]">
+        
+        <!-- Close Button -->
+        <button @click="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-2 rounded-full bg-zinc-950/50 hover:bg-accent text-zinc-300 hover:text-zinc-950 transition-colors backdrop-blur">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <!-- Left: Image -->
+        <div class="w-full md:w-[45%] h-64 md:h-auto relative shrink-0">
+          <img :src="activeMember?.img" class="absolute inset-0 w-full h-full object-cover" alt="Member Photo">
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent to-zinc-900 hidden md:block"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent block md:hidden"></div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="w-full md:w-[55%] p-8 md:p-12 flex flex-col justify-center overflow-y-auto custom-scrollbar">
+          
+          <p class="text-xs font-bold text-accent tracking-widest uppercase mb-2" x-text="activeMember?.role"></p>
+          <h2 class="font-display font-bold text-4xl text-white mb-6" x-text="activeMember?.name"></h2>
+          
+          <div class="h-px w-16 bg-zinc-700 mb-6"></div>
+
+          <p class="text-zinc-400 leading-relaxed mb-8" x-text="activeMember?.bio"></p>
+
+          <!-- Skills Tags -->
+          <div class="mb-10">
+            <h4 class="text-white font-medium text-sm mb-3">Expertise & Focus:</h4>
+            <div class="flex flex-wrap gap-2">
+              <template x-for="skill in activeMember?.skills" :key="skill">
+                <span class="px-3 py-1.5 rounded-md bg-zinc-950 border border-zinc-800 text-xs text-zinc-300" x-text="skill"></span>
+              </template>
+            </div>
+          </div>
+
+          <!-- THE VIEW PORTFOLIO BUTTON -->
+          <div>
+            <a :href="activeMember?.portfolioLink" target="_blank" 
+               class="inline-flex items-center gap-2 bg-accent text-zinc-950 font-bold px-8 py-4 rounded-full hover:bg-accent-light hover:shadow-[0_0_20px_-5px_rgba(197,154,69,0.5)] transition-all duration-300 text-sm">
+              View Portfolio
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="border-t border-zinc-900 bg-zinc-950 py-10 text-center text-sm text-zinc-500">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="font-display font-bold text-lg text-white">
+      MKB <span class="text-accent">Films</span>
+    </div>
+    <p>© <span x-text="new Date().getFullYear()"></span> MKB Films All rights reserved. Gilgit-Baltistan.</p>
+  </div>
+</footer>
+
+<!-- ═══ ALPINE LOGIC ═══ -->
+<script>
+function teamApp() {
+  return {
+    modalOpen: false,
+    activeMember: null,
+    
+    // Define the team members here
+    members: [
+      {
+        id: 1,
+        name: 'Anwar Ali Khan',
+        role: 'Creative Director',
+        img: 'anwar.jpeg', // Replace with your actual image path
+        bio: 'With over a decade of experience in visual storytelling, Anwar leads the creative vision at MKB Films. His unique approach to cinematography has shaped campaigns for major tourism boards and international NGOs, blending raw emotion with high-end production value.',
+        skills: ['Creative Direction', 'Storyboarding', 'Documentary Filmmaking', 'Brand Strategy'],
+        portfolioLink: '#anwar-portfolio'
+      },
+      {
+        id: 2,
+        name: 'Kashif Ali',
+        role: 'Lead Videographer & Editor',
+        img: 'kashif.png', // Replace with your actual image path
+        bio: 'Kashif is the technical backbone of MKB Films. Whether navigating a drone through the valleys of Skardu or color-grading a commercial to cinematic perfection in DaVinci Resolve, his precision ensures every frame looks flawless.',
+        skills: ['Cinematography', 'Drone Operation', 'DaVinci Resolve', 'Color Grading'],
+        portfolioLink: '#kashif-portfolio'
+      },
+      {
+        id: 3,
+        name: 'Asim Ali',
+        role: 'Art & Graphic Designer',
+        img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80', // Placeholder
+        bio: 'Asim transforms concepts into striking visual identities. He oversees motion graphics, title sequences, and production design, ensuring the aesthetic identity of MKB Films remains cutting-edge and visually consistent across all media.',
+        skills: ['Motion Graphics', 'Typography', 'VFX Integration', 'Brand Identity'],
+        portfolioLink: '#asim-portfolio'
+      },
+      {
+        id: 4,
+        name: 'Hassan Mehdi',
+        role: 'Production Manager',
+        img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80', // Placeholder
+        bio: 'Hassan bridges the gap between creative vision and on-ground execution. Managing logistics, lighting crews, and client relations, he ensures that complex, multi-day shoots in remote environments run smoothly and efficiently.',
+        skills: ['Logistics', 'Audio Engineering', 'Set Lighting', 'Client Relations'],
+        portfolioLink: '#hassan-portfolio'
+      }
+    ],
+
+    openModal(member) {
+      this.activeMember = member;
+      this.modalOpen = true;
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    },
+    
+    closeModal() {
+      this.modalOpen = false;
+      document.body.style.overflow = 'auto'; // Restore scrolling
+      setTimeout(() => { this.activeMember = null; }, 300); // Clear data after animation finishes
+    }
+  }
+}
+</script>
+
+<style>
+  /* Custom scrollbar for modal text area */
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #3A434F; border-radius: 4px; }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: #C59A45; }
+</style>
+
+</body>
+</html>
