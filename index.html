@@ -414,19 +414,57 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 </section>
 
 <!-- ═══ ABOUT ═══ -->
+
+
+
+
 <section id="about" class="py-24">
   <div class="max-w-6xl mx-auto px-6">
     <div class="grid md:grid-cols-2 gap-16 items-center">
 
-      <div class="reveal order-2 md:order-1">
-        <div class="pf w-full aspect-square max-w-sm mx-auto rounded-3xl relative">
-          <img src="https://images.unsplash.com/photo-1558222218-b7b54eede3f3?w=700&q=80" alt="Muhammad Khawar Bagoro" loading="lazy">
-          <div class="absolute -bottom-4 -right-4 bg-accent text-white font-display font-bold text-sm px-6 py-3 rounded-2xl shadow-lg">Founder & CEO</div>
+      <!-- Slider Section -->
+      <div class="reveal order-2 md:order-1 relative">
+        <div class="w-full aspect-square max-w-sm mx-auto rounded-3xl relative overflow-hidden group shadow-lg">
+          
+          <!-- Image Slider Container -->
+          <div class="flex overflow-x-auto snap-x snap-mandatory h-full w-full hide-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+            
+            <!-- Image 1 -->
+            <img src="https://images.unsplash.com/photo-1558222218-b7b54eede3f3?w=700&q=80" 
+                 alt="Muhammad Khawar Bagoro 1" loading="lazy" 
+                 class="w-full h-full object-cover shrink-0 snap-center cursor-pointer transition-transform duration-300 hover:scale-105"
+                 onclick="openImageModal(this.src)">
+                 
+            <!-- Image 2 (Replace src with your 2nd image) -->
+            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=700&q=80" 
+                 alt="Muhammad Khawar Bagoro 2" loading="lazy" 
+                 class="w-full h-full object-cover shrink-0 snap-center cursor-pointer transition-transform duration-300 hover:scale-105"
+                 onclick="openImageModal(this.src)">
+                 
+            <!-- Image 3 (Replace src with your 3rd image) -->
+            <img src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=700&q=80" 
+                 alt="Muhammad Khawar Bagoro 3" loading="lazy" 
+                 class="w-full h-full object-cover shrink-0 snap-center cursor-pointer transition-transform duration-300 hover:scale-105"
+                 onclick="openImageModal(this.src)">
+                 
+          </div>
+
+          <div class="absolute -bottom-4 -right-4 bg-accent text-white font-display font-bold text-sm px-6 py-3 rounded-2xl shadow-lg z-10">
+            Founder & CEO
+          </div>
         </div>
+        <!-- Helper text for slider -->
+        <p class="text-center text-xs text-zinc-400 mt-6 italic md:hidden">Swipe to see more photos</p>
       </div>
 
+      <!-- Text Section -->
       <div class="order-1 md:order-2">
-        <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">About Muhammad Khawar Bagoro, CEO MKB Production</h2>
+        <h2 class="reveal d1 font-display font-bold leading-tight mb-6">
+          <span class="text-4xl md:text-5xl text-zinc-900 dark:text-white">About</span> 
+          <span class="text-4xl md:text-5xl text-primary">Muhammad Khawar</span>
+          <span class="block text-2xl md:text-3xl text-zinc-600 dark:text-zinc-300 font-medium mt-2">CEO MKB Production</span>
+        </h2>
+        
         <p class="reveal d2 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
           MKB Production is a premium video production house founded and led by Muhammad Khawar Bagoro, one of Gilgit-Baltistan's leading content creators and filmmakers. We specialize in producing cinematic, high-impact visual content for government institutions, corporate organizations, tourism brands, NGOs, and development partners.
         </p>
@@ -441,6 +479,58 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
     </div>
   </div>
 </section>
+
+<!-- Fullscreen Image Modal -->
+<div id="imageModal" class="fixed inset-0 z-[100] hidden bg-black/95 flex items-center justify-center p-4 md:p-8 backdrop-blur-sm transition-opacity" onclick="closeImageModal(event)">
+  <!-- Close Button -->
+  <button class="absolute top-6 right-6 text-white hover:text-primary transition-colors p-2 z-10" onclick="closeImageModal(event, true)">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <!-- Modal Image -->
+  <img id="modalImg" src="" class="max-w-full max-h-full rounded-lg object-contain shadow-2xl relative" alt="Fullscreen view">
+</div>
+
+<!-- Modal Logic -->
+<script>
+  function openImageModal(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+    
+    modalImg.src = src;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevents background scrolling
+  }
+
+  function closeImageModal(e, forceClose = false) {
+    const modal = document.getElementById('imageModal');
+    
+    // Close if the close button is clicked OR if the dark background is clicked
+    if (forceClose || e.target.id === 'imageModal') {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto'; // Restores background scrolling
+    }
+  }
+</script>
+
+<style>
+  /* Fallback to hide scrollbar for webkit browsers in the slider */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+
+
+
+
+
+
+
+  
+  <!-- ═══ END ABOUT ═══ -->
+
 
 <!-- ═══ CLIENTS (SLIDER) ═══ -->
 <section id="clients" class="py-24 bg-zinc-50 dark:bg-zinc-900/40" x-data="{
